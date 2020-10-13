@@ -70,16 +70,56 @@ print("Average of bore:", avg_bore)
 #Replace NaN by mean value
 df["bore"].replace(np.nan, avg_bore, inplace=True)
 
+#Calculate the mean value for 'stroke' column
+
+avg_stroke= df['stroke'].astype("float").mean(axis=0)
+print("Average of stroke:", avg_stroke)
+#Replace NaN by mean value
+df["stroke"].replace(np.nan, avg_stroke, inplace=True)
 
 
+#Calculate the mean value for the 'horsepower' column:
+avg_horsepower = df['horsepower'].astype("float").mean(axis=0)
+print("Average horsepower:", avg_horsepower)
+
+#Replace "NaN" by mean value:
+
+df["horsepower"].replace(np.nan, avg_horsepower, inplace=True)
 
 
+#Calculate the mean value for 'peak-rpm' column:
 
+avg_peak= df['peak-rpm'].astype("float").mean(axis=0)
+print("Average peak-rpm :", avg_peak)
 
+#Replace "NaN" by mean value:
+df["peak-rpm"].replace(np.nan, avg_peak, inplace=True)
 
+#To see which values are present in a particular column, we can use the ".value_counts()" method:
 
+df['num-of-doors'].value_counts()
+"""
+We can see that four doors are the most common
+ type. We can also use the ".idxmax()" method to 
+ calculate for us the most common type automatically:
 
+"""
+df['num-of-doors'].value_counts().idxmax()
 
+#replace the missing 'num-of-doors' values by the most frequent 
+df["num-of-doors"].replace(np.nan, "four", inplace=True)
+
+#Finally, let's drop all rows that do not have price data:
+
+# simply drop whole row with NaN in "price" column
+df.dropna(subset=["price"], axis=0, inplace=True)
+
+# reset index, because we droped two rows
+df.reset_index(drop=True, inplace=True)    
+
+print(df.head())
+
+#Good! Now, we obtain the dataset with no missing values.
 
 
 
