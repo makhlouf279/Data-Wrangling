@@ -55,7 +55,43 @@ without price data cannot be used for prediction; therefore
 any row now without price data is not useful to us
 """
 #Calculate the average of the column
-avg_norm_loss = df["normalized-losses"].astype("float").mean(axis=0)
+avg_norm_loss= df["normalized-losses"].astype("float").mean(axis=0)
 print("Average of normalized-losses:", avg_norm_loss)
+
+#Replace "NaN" by mean value in "normalized-losses" column
+
+df["normalized-losses"].replace(np.nan, avg_norm_loss, inplace=True)
+
+#Calculate the mean value for 'bore' column
+avg_bore= df['bore'].astype("float").mean(axis=0)
+print("Average of bore:", avg_bore)
+
+
+#Replace NaN by mean value
+df["bore"].replace(np.nan, avg_bore, inplace=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
