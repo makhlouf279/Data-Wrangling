@@ -19,7 +19,7 @@ display(df)
 #Convert "?" to NaN
 
 df.replace("?", np.nan, inplace = True)
-print(df.head(5))
+print(df.head(50))
 
 #Evaluating for Missing Data
 
@@ -31,3 +31,31 @@ for column in missing_data.columns.values.tolist():
     print(column)
     print (missing_data[column].value_counts())
     print("")   
+
+#Deal with missing data// Replace by mean:
+    """
+    Replace by mean:
+
+"normalized-losses": 41 missing data, replace them with mean
+"stroke": 4 missing data, replace them with mean
+"bore": 4 missing data, replace them with mean
+"horsepower": 2 missing data, replace them with mean
+"peak-rpm": 2 missing data, replace them with mean
+
+Replace by frequency:
+
+"num-of-doors": 2 missing data, replace them with "four".
+Reason: 84% sedans is four doors. Since four doors is most frequent,
+ it is most likely to occur
+Drop the whole row:
+
+"price": 4 missing data, simply delete the whole row
+Reason: price is what we want to predict. Any data entry 
+without price data cannot be used for prediction; therefore 
+any row now without price data is not useful to us
+"""
+#Calculate the average of the column
+avg_norm_loss = df["normalized-losses"].astype("float").mean(axis=0)
+print("Average of normalized-losses:", avg_norm_loss)
+
+
